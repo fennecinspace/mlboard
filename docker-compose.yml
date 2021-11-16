@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  # db:
+  #   container_name: mlboard_db
+  #   image: mysql:5.7.24
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   restart: unless-stopped
+  #   environment:
+  #     MYSQL_DATABASE: MLBOARD
+  #     MYSQL_USER: MLBOARD
+  #     MYSQL_PASSWORD: MLBOARD
+  #     MYSQL_ROOT_PASSWORD: MLBOARD
+  #   volumes:
+  #     - ./db:/var/lib/mysql
+  #   networks:
+  #     - mlboardnet
+
+  # db-admin:
+  #   image: phpmyadmin:5.0.2-apache
+  #   restart: always
+  #   ports:
+  #     - 8080:80
+  #   environment:
+  #     - PMA_ARBITRARY=1
+  #     - PMA_HOST=db
+  #     - PMA_USER=MLBOARD
+  #     - PMA_PASSWORD=MLBOARD
+  #     - PMA_PORT=3306
+  #   networks:
+  #     - mlboardnet
+  #   depends_on: 
+  #     - db
+
+  api:
+    build: mlboardapi
+    container_name: mlboardapi
+    command: python3 manage.py runserver 0.0.0.0:8000
+    restart: always
+    volumes:
+      - ./mlboardapi:/code
+    ports:
+      - 8000:8000
+    networks:
+      - mlboardnet
+    # depends_on: 
+    #   - db
+
+networks:
+  mlboardnet:
