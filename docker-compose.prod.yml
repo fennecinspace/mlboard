@@ -1,0 +1,51 @@
+version: '3.2'
+
+services:
+  web:
+    container_name: hackia-web
+    build:
+      context: ./hackia
+
+    # use django dev server
+    # command: python manage.py runserver 0.0.0.0:8000
+
+    # use gunicorn
+    command: gunicorn hackia.wsgi:application --bind 0.0.0.0:8000
+
+    restart: always
+    volumes:
+      - ./hackia/static:/static
+      - ./hackia/media:/media
+      - ./hackia:/code 
+    environment: 
+      - DEBUG=False
+    # ports:
+    #   - 8000:8000
+    networks:
+      - hackianet
+
+  swag:
+    image: ghcr.io/linuxserver/swag
+    container_name: hackia-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
+      - URL=hackia.cf
+      - SUBDOMAINS=www,
+      - EXTRA_DOMAINS=hackia.eu
+      - VALIDATION=http
+    volumes:
+      - ./hackia/media:/media
+      - ./hackia/static:/static
+      - ./configs/nginx.conf:/config/nginx/nginx.conf
+      - ./configs/hackia.conf:/config/nginx/site-confs/hackia.conf
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+    networks:
+      - hackianet
+
+networks:
+  hackianet:
