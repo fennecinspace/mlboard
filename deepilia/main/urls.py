@@ -1,9 +1,10 @@
 from django.urls import path, include
 
-from . import views
+from main import views
 
 urlpatterns = [
     path('team/', views.team_view, name='team'),
+    path('team/<str:username>/', views.ProfileView.as_view(), name='profile'),
 
 	# path('', views.home_view, name='home'),
 	# path('<int:year>', views.home_view, name='home_per_year'),

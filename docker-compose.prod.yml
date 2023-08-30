@@ -2,50 +2,49 @@ version: '3.2'
 
 services:
   web:
-    container_name: hackia-web
+    container_name: deepilia-web
     build:
-      context: ./hackia
+      context: ./deepilia
 
     # use django dev server
     # command: python manage.py runserver 0.0.0.0:8000
 
     # use gunicorn
-    command: gunicorn hackia.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn deepilia.wsgi:application --bind 0.0.0.0:8000
 
     restart: always
     volumes:
-      - ./hackia/static:/static
-      - ./hackia/media:/media
-      - ./hackia:/code 
+      - ./deepilia/static:/static
+      - ./deepilia/media:/media
+      - ./deepilia:/code 
     environment: 
       - DEBUG=False
     # ports:
     #   - 8000:8000
     networks:
-      - hackianet
+      - deepilianet
 
   swag:
     image: ghcr.io/linuxserver/swag
-    container_name: hackia-server
+    container_name: deepilia-server
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Brussels
-      - URL=hackia.cf
+      - URL=deepilia.com
       - SUBDOMAINS=www,
-      - EXTRA_DOMAINS=hackia.eu
       - VALIDATION=http
     volumes:
-      - ./hackia/media:/media
-      - ./hackia/static:/static
+      - ./deepilia/media:/media
+      - ./deepilia/static:/static
       - ./configs/nginx.conf:/config/nginx/nginx.conf
-      - ./configs/hackia.conf:/config/nginx/site-confs/hackia.conf
+      - ./configs/deepilia.conf:/config/nginx/site-confs/deepilia.conf
     ports:
       - 80:80
       - 443:443
     restart: unless-stopped
     networks:
-      - hackianet
+      - deepilianet
 
 networks:
-  hackianet:
+  deepilianet:
