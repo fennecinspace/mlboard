@@ -510,3 +510,79 @@ header > div .nav-item .dropdown-menu {
     width: 40px;
     height: 40px;
 }
+
+.project_item {
+    margin-bottom: 100px;
+}
+
+.project_item .header {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    grid-gap: 10px;
+    padding-top: 30px;
+}
+
+.project_item .header h3 {
+    font-weight: 700;
+    /* font-style: italic; */
+    color: #BD0E3A;
+}
+
+.project_item .header span  {
+    justify-self: end;
+    font-weight: 600;
+    color: #00366D;
+}
+
+.project_item > img {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.project_item > p {
+    text-align: justify;
+}
+
+.project_item .footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.project_item .footer h4 {
+    position: relative;
+    width: max-content;
+    padding-right: 10px;
+    padding-top: 30px;
+}
+
+
+.project_item .footer h4:before {
+    width: 100%;
+    height: 12px;
+    background-color: rgba(255, 255, 8, 0.724);
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    bottom: 2px;
+    z-index: -1;
+}
+
+.project_item .footer .team img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #00366D;
+    margin: 10px;
+}
+
+
+.project_item .footer .partners img {
+    width: 300px;
+    margin: 10px;
+}

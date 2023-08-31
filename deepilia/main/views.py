@@ -17,6 +17,10 @@ def team_view(request):
 	}
 	return render(request, 'team.html', context)
 
+def main_view(request):
+	context = {}
+	return render(request, 'home.html', context)
+
 class ProfileView(DetailView):
 	model = Member
 	template_name = 'profile.html'

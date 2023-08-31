@@ -28,7 +28,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
-    list_display = ['name', 'logo']
+    list_display = ['name', 'logo', 'website']
     
 @admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):
