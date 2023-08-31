@@ -214,7 +214,7 @@ p {
 }
 
 #main_page_title:before {
-    width: 80%;
+    width:  calc(100% - var(--bs-gutter-x));
     height: 15px;
     background-color: rgba(8, 255, 140, 0.724);
     content: "";

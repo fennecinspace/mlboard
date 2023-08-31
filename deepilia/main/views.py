@@ -1,8 +1,8 @@
 from typing import Any, Optional
 from django.db import models
 from django.shortcuts import render
-from django.views.generic import DetailView
-from main.models import Member
+from django.views.generic import DetailView, ListView
+from main.models import Member, Application, Project
 
 # Create your views here.
 
@@ -25,3 +25,11 @@ class ProfileView(DetailView):
 		return self.model.objects.get(
 			user__username = self.kwargs.get("username")
 		)
+	
+class AppsView(ListView):
+	model = Application
+	template_name = 'apps.html'
+
+class ProjectsView(ListView):
+	model = Project
+	template_name = 'projects.html'

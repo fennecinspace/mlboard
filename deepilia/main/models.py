@@ -27,3 +27,25 @@ class Thesis(models.Model):
     keywords = models.CharField(max_length=256, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     advisors = models.ManyToManyField('Member', blank=True, related_name = "supervisions")
+
+
+class Project(models.Model):
+    title = models.CharField(max_length=512, null=True, blank=True)
+    description = models.TextField(max_length=3000, blank=True)
+    image = models.ImageField(null=True, blank=True)
+    partners = models.ManyToManyField('Partner', blank=True)
+    managers = models.ManyToManyField('Member', blank=True, related_name = 'managers')
+    researchers = models.ManyToManyField('Member', blank=True, related_name = 'researchers')
+
+
+class Partner(models.Model):
+    name = models.CharField(max_length=512, null=True, blank=True)
+    logo = models.ImageField(null=True, blank=True)
+
+
+class Application(models.Model):
+    name = models.CharField(max_length=512, null=True, blank=True)
+    short_description = models.CharField(max_length=512, null=True, blank=True)
+    description = models.TextField(max_length=3000, blank=True)
+    youtube_video_code = models.CharField(max_length=20, null=True, blank=True)
+    github = models.URLField(null=True, blank=True)

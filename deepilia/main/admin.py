@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Member, Thesis
+from main.models import Member, Thesis, Project, Partner, Application
 
 
 @admin.register(Member)
@@ -19,3 +19,18 @@ class ThesisAdmin(admin.ModelAdmin):
     def phd(self, obj):
         student = Member.objects.filter(thesis = obj)
         return student [0] if student.__len__() else None
+
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ['title', 'image']
+    
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ['name', 'logo']
+    
+@admin.register(Application)
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = ['name', 'youtube_video_code', 'github']
+    

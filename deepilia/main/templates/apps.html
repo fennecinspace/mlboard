@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load i18n static %}
+
+{% block content %}
+<div id="old_content" class="medium_center">
+<div class="container-fluid" id="body">
+
+	<div class="row" style="align-items: center;">
+		<div id="main_page_title">
+            APPS &amp; DEMOS
+		</div>
+	</div>
+
+	{% for item in object_list %}
+
+		<div class="app_item">
+
+			<div class="header">
+				<div>
+					<h3>{{ item.name }}</h3>
+					<p>{{ item.short_description }}</p>
+				</div>
+				{% if item.github %}
+					<a href="{{ item.github }}" target="_blank"><img src="{% static 'images/github.png' %}"></a>
+				{% endif %}
+			</div>
+
+			<div class="body">
+				<p>{{ item.description }}</p>
+				<div class="yt">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ item.youtube_video_code }}" allowfullscreen></iframe>
+				</div>
+			</div>
+
+		</div>
+
+	{% endfor %}
+
+</div>
+</div>
+
+{% endblock %}
+

@@ -99,12 +99,9 @@
             <nav>
                 <div>
                     <a href="/" class="umons_red_btn" >Home</a>
-                    <a href="/team/" class="umons_grey_btn">Team</a>
-                    <a href="/prix/" class="umons_grey_btn">Projects</a>
-                    <a href="/apps/" class="umons_grey_btn">Publications</a>
-                    <a href="/priticipants/" class="umons_grey_btn">Applications &amp; Demos</a>
-                    <!-- <a href="/comite/" class="umons_grey_btn">Events</a> -->
-                    <a href="/comite/" class="umons_grey_btn">News</a>   
+                    <a href="{% url 'team' %}" class="umons_grey_btn">Team</a>
+                    <a href="{% url 'projects' %}" class="umons_grey_btn">Projects</a>
+                    <a href="{% url 'apps' %}" class="umons_grey_btn">Applications &amp; Demos</a>
                 </div>
 
                 <div></div>
@@ -145,10 +142,10 @@
                     <div>
                         <h3>Ressources</h3>
                         <ul>
-                            <li><a href="/team/">Team</a></li>
-                            <li><a href="/programme">Projects</a></li>
-                            <li><a href="/apps">News</a></li>
-                            <li><a href="/comite">Login</a></li>
+                            <li><a target="_blank" href="{% url 'team' %}">Team</a></li>
+                            <li><a target="_blank" href="{% url 'projects' %}">Projects</a></li>
+                            <li><a target="_blank" href="{% url 'apps' %}">Applications</a></li>
+                            <li><a target="_blank" href="{% url 'admin:index' %}">Login</a></li>
                         </ul>
                     </div>
                     <!-- <div>
