@@ -33,8 +33,10 @@
 	</div>
 
 		<div id="profile_content" class="medium_center">
-			<div class="comite_section-title reuse"></div>
-			<div class="comite_section-content reuse" style="height: 100px;"></div>
+			{% if object.bio or object.thesis  %}
+				<div class="comite_section-title reuse"></div>
+				<div class="comite_section-content reuse" style="height: 100px;"></div>
+			{% endif %}
 
 			<!-- Biography -->
 			{% if object.bio %}
