@@ -20,36 +20,46 @@
 				<h3>{{ item.title }}</h3>
 				<span>{{ item.start_date|date:"Y" }} - {{ item.end_date|date:"Y" }}</span>
 			</div>
+			
+			{% if item.image %}
+				<img src="{{ item.image.url }}" alt="">
+			{% endif %}
 
-			<img src="{{ item.image.url }}" alt="">
-
-			<p>{{ item.description }}</p>
+			{% item.description %}
+				<p>{{ item.description }}</p>
+			{% endif %}
 
 			<div class="footer">
 				<div class="team">
-					<h4>Coordinators</h4>
-					<div>
-						{% for manager in item.managers.all %}
-							<a target="_blank" href="{% url 'profile' manager.user.username %}"><img src="{{ manager.picture.url }}" alt=""></a>
-						{% endfor %}
-					</div>
+					{% if item.managers.all %}
+						<h4>Coordinators</h4>
+						<div>
+							{% for manager in item.managers.all %}
+								<a target="_blank" href="{% url 'profile' manager.user.username %}"><img src="{{ manager.picture.url }}" alt=""></a>
+							{% endfor %}
+						</div>
+					{% endif %}
 
-					<h4>Researchers</h4>
-					<div>
-						{% for researcher in item.researchers.all %}
-							<a target="_blank" href="{% url 'profile' researcher.user.username %}"><img src="{{ researcher.picture.url }}" alt=""></a>
-						{% endfor %}
-					</div>
+					{% if item.researchers.all %}
+						<h4>Researchers</h4>
+						<div>
+							{% for researcher in item.researchers.all %}
+								<a target="_blank" href="{% url 'profile' researcher.user.username %}"><img src="{{ researcher.picture.url }}" alt=""></a>
+							{% endfor %}
+						</div>
+					{% endif %}
 					
 				</div>
 				
 				<div class="partners">
-					<h4>Partners</h4>
-					<div>
-						{% for partner in item.partners.all %}
-							<a target="_blank" href="{{ partner.website }}"><img src="{{ partner.logo.url }}" alt=""></a>
-						{% endfor %}
-					</div>
+					{% if item.partners.all %}
+						<h4>Partners</h4>
+						<div>
+							{% for partner in item.partners.all %}
+								<a target="_blank" href="{{ partner.website }}"><img src="{{ partner.logo.url }}" alt=""></a>
+							{% endfor %}
+						</div>
+					{% endif %}
 				</div>
 			</div>
 
