@@ -3,12 +3,125 @@
 {% load i18n static %}
 
 {% block content %}
-<div id="old_content" class="medium_center">
-<div class="container-fluid" id="body">
+<div id="old_content">
+<div class="container-fluid" id="body" style="padding: 0;">
+    <div id="header">
+        {% for post in news %}
+            {% if forloop.first %}
+                <div class="news_post">
+                    <img src="{{ post.header.url }}" alt="">
+                    <div>
+                        <span>{{ post.date|date:"M d, Y" }}</span>
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.short_content }}</p>
+                        <a href="{% url 'news' post.id %}" target="_blank" class="arrow_btn">Read more 
+                            <svg class="btn_hover_arrow" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                                <g fill-rule="evenodd">
+                                    <path class="btn_hover_arrow__linePath" d="M0 5h7"></path>
+                                    <path class="btn_hover_arrow__tipPath" d="M1 1l4 4-4 4"></path>
+                                </g>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 
+    {% for post in news %}
+        <div class="news_post_list_item" style="display: none;">
+            <img src="{{ post.header.url }}" alt="">
+            <div>
+                <span>{{ post.date|date:"M d, Y" }}</span>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.short_content }}</p>
+                <a href="{% url 'news' post.id %}" target="_blank" class="arrow_btn">Read more 
+                    <svg class="btn_hover_arrow" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                        <g fill-rule="evenodd">
+                            <path class="btn_hover_arrow__linePath" d="M0 5h7"></path>
+                            <path class="btn_hover_arrow__tipPath" d="M1 1l4 4-4 4"></path>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
 
+    <script>
+
+        let news = document.querySelectorAll('.news_post_list_item')
+        let index = 0
+
+        setInterval(() => {
+            document.querySelector('.news_post img').classList.add('animate')
+            document.querySelector('.news_post span').classList.add('animate')
+            document.querySelector('.news_post h3').classList.add('animate')
+            document.querySelector('.news_post p').classList.add('animate')
+            document.querySelector('.news_post a').classList.add('animate')
+
+            setTimeout(() => {
+                document.querySelector('.news_post img').src = news[index].querySelector('img').src;
+                document.querySelector('.news_post span').innerText = news[index].querySelector('span').innerText;
+                document.querySelector('.news_post h3').innerText = news[index].querySelector('h3').innerText;
+                document.querySelector('.news_post p').innerText = news[index].querySelector('p').innerText;
+                document.querySelector('.news_post a').href = news[index].querySelector('a').href;
+
+                document.querySelector('.news_post img').classList.remove('animate')
+                document.querySelector('.news_post span').classList.remove('animate')
+                document.querySelector('.news_post h3').classList.remove('animate')
+                document.querySelector('.news_post p').classList.remove('animate')
+                document.querySelector('.news_post a').classList.remove('animate')
+            }, 500)
+
+            if (index + 1 < news.length) {index += 1} else {index = 0}
+        }, 5000)
+
+    </script>
+
+    <div id="header_filler"></div>
+
+    <div id="domains_home_section" class="medium_center">
+        <div>
+            <img src="{% static 'images/home/001.png' %}" alt="">
+            <span>Computer Vision</span>
+        </div>
+
+        <div>
+            <img src="{% static 'images/home/002.png' %}" alt="">
+            <span>Edge Computing</span>
+        </div>
+
+        <div>
+            <img src="{% static 'images/home/003.png' %}" alt="">
+            <span>3D Processing</span>
+        </div>
+
+        <div>
+            <img src="{% static 'images/home/004.png' %}" alt="">
+            <span>Explainability</span>
+        </div>
+    </div>
+
+    <div id="code_home_section">
+        <div class="medium_center">
+            <div>
+                <h3>We publish code for researchers <br> and for industry !</h3>
+                <p>We have published multiple frameworks and libraries for the research community, some were created during workshops or as part of publications. Others, are the results of the work done in multiple student project at UMONS. We are also proud to have worked on multiple industrial projects with amazing partners, who allowed us to share the knowledge.</p>
+                <a href="https://github.com/DeepILIA" target="_blank" class="arrow_btn">Check out the github 
+                    <svg class="btn_hover_arrow" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                        <g fill-rule="evenodd">
+                            <path class="btn_hover_arrow__linePath" d="M0 5h7"></path>
+                            <path class="btn_hover_arrow__tipPath" d="M1 1l4 4-4 4"></path>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+            <div>
+                <img src="{% static 'images/home/005.png' %}" alt="">
+            </div>
+        </div>
+    </div>
 </div>
 </div>
-
 {% endblock %}
 

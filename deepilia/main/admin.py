@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Member, Thesis, Project, Partner, Application
+from main.models import Member, Thesis, Project, Partner, Application, Post
 
 
 @admin.register(Member)
@@ -33,4 +33,9 @@ class PartnerAdmin(admin.ModelAdmin):
 @admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = ['name', 'youtube_video_code', 'github']
+    
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['title', 'header']
     

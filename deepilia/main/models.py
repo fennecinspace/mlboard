@@ -62,3 +62,14 @@ class Application(models.Model):
 
     def __str__(self):
         return self.name
+    
+    
+class Post(models.Model):
+    title = models.CharField(max_length=1024)
+    header = models.ImageField()
+    short_content = models.TextField(max_length=2048)
+    content = models.TextField(max_length=10000)
+    date = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return self.title
