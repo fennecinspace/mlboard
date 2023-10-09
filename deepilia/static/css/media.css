@@ -31,23 +31,30 @@
         border-left: 6px solid #1E4D7E;
     }
 
+    .comite_section-title.collaborators { 
+        border-left: 6px solid #056446;
+    }
+
     .comite_section-title.coachs { 
         border-left: 6px solid #BD0E3A;
     }
 
     .comite_section-title.organizers,
     .comite_section-title.jury,
-    .comite_section-title.coachs {
+    .comite_section-title.coachs,
+    .comite_section-title.collaborators {
         margin-top: 0;
     }
 
     .comite_section-content.organizers,
-    .comite_section-content.jury {
+    .comite_section-content.jury,
+    .comite_section-content.collaborators {
         padding-top: 50px;
     }
 
     .comite_section-content.coachs .comite_section-person:last-child,
-    .comite_section-content.jury .comite_section-person:last-child {
+    .comite_section-content.jury .comite_section-person:last-child,
+    .comite_section-content.collaborators {
         padding-bottom: 150px;
     }
 
@@ -55,7 +62,8 @@
 
     .comite_section-title.organizers, 
     .comite_section-title.jury,
-    .comite_section-title.coachs {
+    .comite_section-title.coachs,
+    .comite_section-title.collaborators {
         border-right: none;
         justify-self: start;
         right: 2px;

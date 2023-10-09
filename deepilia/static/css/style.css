@@ -282,8 +282,17 @@ p {
     border-right: 6px solid #4d4d4d;
 }
 
+.comite_section-title.collaborators {
+    color: #056446;
+    border-right: 6px solid #056446;
+}
+
 .organizers .comite_section-person span {
     background-color: #4d4d4d;
+}
+
+.collaborators .comite_section-person span {
+    background-color: #056446;
 }
 
 .comite_section-title.jury {
@@ -296,11 +305,11 @@ p {
     border-left: 2px dashed #949494;
 }
 
-.comite_section-title.jury, .comite_section-title.organizers {
+.comite_section-title.jury, .comite_section-title.organizers, .comite_section-title.collaborators {
     margin-top: 100px;
 }
 
-.comite_section-content.jury, .comite_section-content.organizers {
+.comite_section-content.jury, .comite_section-content.organizers, .comite_section-content.collaborators {
     padding-top: 150px;
 }
 
@@ -345,6 +354,10 @@ p {
     border: 5px solid #00366D;
 }
 
+.collaborators .comite_section-person > img {
+    border: 5px solid #056446;
+}
+
 .comite_section-person h3 {
     font-size: 27px;
     font-weight: 700;
@@ -355,10 +368,19 @@ p {
     margin-top: 0;
 }
 
+.comite_section-content.collaborators {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .comite_section-person > div {
     display: grid;
     /* grid-gap: 10px; */
     align-content: baseline;
+}
+
+.comite_section-person-other, .comite_section-person-other > div {
+    width: max-content;
 }
 
 .comite_section-person > div > img {
@@ -378,6 +400,20 @@ p {
 .comite_section-person .social a img {
     width: 100%;
 }
+
+.comite_section-person-other h3 {
+    font-size: 20px;
+}
+
+.comite_section-person-other p, .comite_section-person-other a {
+    font-size: 15px;
+}
+
+.comite_section-person-other > img {
+    width: 120px;
+    height: 120px;
+}
+
 
 .down_btn-1, .down_btn-2, .down_btn-3, .down_btn-4 {
     display: block;

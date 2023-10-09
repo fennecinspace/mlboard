@@ -12,7 +12,7 @@ def team_view(request):
 		'allums': None,
 		'phds': Member.objects.filter(rank = "PhD Student"),
 		'postdocs': None,
-		'collaborators': None,
+		'collaborators': Member.objects.filter(rank = "Other"),
 		'engineers': Member.objects.filter(rank = "Engineer"),
 	}
 	return render(request, 'team.html', context)

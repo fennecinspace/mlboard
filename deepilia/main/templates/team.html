@@ -92,6 +92,32 @@
 		</div>
 		{% endif %}
 
+		{% if collaborators %}
+		<div class="comite_section-title collaborators">Collaborators</div>
+		<div class="comite_section-content collaborators">
+			{% for collaborator in collaborators %}
+			
+				<div class="comite_section-person comite_section-person-other">
+					<img src="{{ collaborator.picture.url }}" alt="">
+					<div>
+						<h3>{{ collaborator.user.first_name }} {{ collaborator.user.last_name }}</h3>
+						<p>{{ collaborator.research_interest }}</p>
+						<a href="{% url 'profile' collaborator.user.username %}" class="arrow_btn blue_button">
+							Check Profile
+							<svg class="btn_hover_arrow" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+								<g fill-rule="evenodd">
+									<path class="btn_hover_arrow__linePath" d="M0 5h7"></path>
+									<path class="btn_hover_arrow__tipPath" d="M1 1l4 4-4 4"></path>
+								</g>
+							</svg>
+						</a>
+					</div>
+				</div>
+			
+			{% endfor %}
+		</div>
+		{% endif %}
+
 	</div>
 
 </div>
