@@ -650,13 +650,14 @@ header > div .nav-item .dropdown-menu {
     right: 0; 
     width: 80%;
     max-width: 800px;
-    height: 300px;
+    max-height: 400px;
+    height: max-content;
     margin-left: auto; 
     margin-right: auto; 
     padding: 20px;
     border-radius: 12px 12px 0 0;
     background: rgba(0, 0, 0, 0.496);
-    overflow: hidden;
+    /* overflow: hidden; */
     text-overflow: hidden;
 }
 
