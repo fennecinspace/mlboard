@@ -165,7 +165,7 @@ footer > div > .center {
 }
 
 footer > div > .center > div {
-    margin: 10px;
+    margin: 10px auto;
     height: 80%;
     width: 90%;
     border-radius: 10px;
@@ -401,6 +401,7 @@ header > div .nav-item .dropdown-menu {
 #profile_header .right > div:last-child {
     position: relative;
     width: 230px;
+    height: 230px;
     height: 100%;
 }
 
@@ -408,6 +409,8 @@ header > div .nav-item .dropdown-menu {
     position: absolute;
     top: 0;
     width: 230px;
+    height: 230px;
+    object-fit: cover;
     border-radius: 50%;
     border: 8px solid #BD0E3A;
 }
