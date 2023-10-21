@@ -2,49 +2,49 @@ version: '3.2'
 
 services:
   web:
-    container_name: deepilia-web
+    container_name: leaderboard
     build:
-      context: ./deepilia
+      context: ./leaderboard
 
     # use django dev server
     # command: python manage.py runserver 0.0.0.0:8000
 
     # use gunicorn
-    command: gunicorn deepilia.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn leaderboard.wsgi:application --bind 0.0.0.0:8000
 
     restart: always
     volumes:
-      - ./deepilia/static:/static
-      - ./deepilia/media:/media
-      - ./deepilia:/code 
+      - ./leaderboard/static:/static
+      - ./leaderboard/media:/media
+      - ./leaderboard:/code 
     environment: 
       - DEBUG=False
     # ports:
     #   - 8000:8000
     networks:
-      - deepilianet
+      - leaderboardnet
 
-  swag:
-    image: ghcr.io/linuxserver/swag
-    container_name: deepilia-server
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Brussels
-      - URL=deepilia.com
-      - SUBDOMAINS=www,
-      - VALIDATION=http
-    volumes:
-      - ./deepilia/media:/media
-      - ./deepilia/static:/static
-      - ./configs/nginx.conf:/config/nginx/nginx.conf
-      - ./configs/deepilia.conf:/config/nginx/site-confs/deepilia.conf
-    ports:
-      - 80:80
-      - 443:443
-    restart: unless-stopped
-    networks:
-      - deepilianet
+  # swag:
+  #   image: ghcr.io/linuxserver/swag
+  #   container_name: leaderboard-server
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Europe/Brussels
+  #     - URL=challenges.deepilia.com
+  #     - SUBDOMAINS=www,
+  #     - VALIDATION=http
+  #   volumes:
+  #     - ./leaderboard/media:/media
+  #     - ./leaderboard/static:/static
+  #     - ./configs/nginx.conf:/config/nginx/nginx.conf
+  #     - ./configs/leaderboard.conf:/config/nginx/site-confs/leaderboard.conf
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   restart: unless-stopped
+  #   networks:
+  #     - leaderboardnet
 
 networks:
-  deepilianet:
+  leaderboardnet:

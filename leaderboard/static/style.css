@@ -1,0 +1,135 @@
+#navigation{
+    padding:10px;
+}
+
+#navigation .dropdown-item:active{
+    background-color: #dc3545!important;
+}
+
+#body{
+    padding:10px;
+    flex:2;
+}
+
+.text-primary{
+    color:#dc3545!important;
+}
+.btn-primary{
+    background-color: #dc3545!important;
+    border-color: #dc3545!important;
+}
+
+.card{
+    color:black;
+    height: 100%;
+}
+
+.app-card{
+    padding:10px;
+}
+
+.app-card img {
+    height: 200px;
+}
+
+.app-card .card-body {
+    height: 200px;
+    overflow-y: auto;
+}
+
+#app-stage {
+    background-color: white;
+    border-radius: 10px;
+    color:black;
+    border: 1px dashed #9c9c9c;
+}
+
+#app-stage, #app-results {
+    margin:10px;
+    padding:10px;    
+}
+
+#app-results-original, #app-results-after, #app-results-result {
+    display:none;
+}
+
+#app-results-result .card {
+    padding: 10px;
+    text-transform: capitalize;
+}
+
+#result-content{
+    white-space: pre-wrap;
+}
+
+#app-results .card{
+    height: 100%;
+    margin:10px;
+}
+
+#app-results img{
+    height: 80%;
+}
+
+#spinner {
+    display: none;
+}
+
+
+
+.card-body {
+    color: black;
+}
+
+
+
+.nav .active {
+    background-color: #dc3545!important;
+    color:white!important;
+}
+
+#app-stage {
+    color: black;
+}
+
+.icon{
+    width: 25px;
+    height: 25px;
+}
+
+#body .card{
+    padding: 10px;
+}
+.app-card .card{
+    padding: 0px!important;
+}
+
+.dropdown-menu {
+    right: 0 !important;
+    left: auto !important;
+}
+
+#carouselWorkshop {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    background: url("images/next.svg") no-repeat center/25px;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #fff;
+    border-radius: 100%;
+    background-color: #fff;
+    opacity: 0.7;
+}
+
+.carousel-control-prev-icon {
+    transform: scaleX(-1);
+}
+
+#landing-section-1 {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+}
+
