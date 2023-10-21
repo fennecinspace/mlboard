@@ -3,6 +3,7 @@ from django.conf import settings
 import time, schedule
 from threading import Thread
 import docker
+import os
 import re
 import logging
 
@@ -13,6 +14,8 @@ class MainConfig(AppConfig):
     name = 'main'
 
     def ready(self):
+        if not os.environ.get('RUN_MAIN'):
+            return
         # self.job()
         t = Thread(target= self.scheduler)
         t.daemon = True
@@ -20,7 +23,7 @@ class MainConfig(AppConfig):
 
     @classmethod
     def scheduler(cls):
-        schedule.every(5).seconds.do(cls.job)
+        schedule.every(10).seconds.do(cls.job)
         # schedule.every(1).minutes.do(cls.reset_requests_queue)
 
         # if settings.PRODUCTION: #spam ip detection and change for verifier
@@ -80,6 +83,7 @@ class MainConfig(AppConfig):
 
         results = results.decode("utf-8") 
         print(results)
+        logging.debug(results)
 
         score = results.split('Score is:')[1].split('\n')[0].strip()
         print(f"Extracted Score {score}")

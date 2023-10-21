@@ -10,17 +10,18 @@ services:
     # command: python manage.py runserver 0.0.0.0:8000
 
     # use gunicorn
-    command: gunicorn leaderboard.wsgi:application --bind 0.0.0.0:8000
-
+    command: python manage.py runserver 0.0.0.0:8000
+    privileged: true
     restart: always
     volumes:
-      - ./leaderboard/static:/static
-      - ./leaderboard/media:/media
+      # - ./leaderboard/static:/static
+      # - ./leaderboard/media:/media
       - ./leaderboard:/code 
+      # - /var/run/docker.sock:/var/run/docker.sock
     environment: 
       - DEBUG=False
-    # ports:
-    #   - 8000:8000
+    ports:
+      - 8000:8000
     networks:
       - leaderboardnet
 
