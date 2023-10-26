@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Challenges | HackIA@Umons</title>
+</head>
+<body>
+    <div class="container is-fullhd">
+        <div class="column is-centered {% if not user.is_authenticated %} is-vcentered {% endif %}">
+            {% if user.is_authenticated %}
+                <header>
+                    <nav class="navbar" role="navigation" aria-label="Main navigation">
+                        <div class="container">
+                            <div class="navbar-brand">
+                                <a class="navbar-item" href="/">
+                                    <!-- Apply a CSS class to increase the size of the logo -->
+                                    <img class="logo" src="{% static 'images/logo.svg' %}" alt="Your Logo">
+                                </a>
+                                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                                    <span aria-hidden="true"></span>
+                                    <span aria-hidden="true"></span>
+                                    <span aria-hidden="true"></span>
+                                </a>
+                            </div>
+            
+                            <div class="navbar-menu">
+                                <div class="navbar-start">
+                                    <!-- Navigation buttons -->
+                                    <a class="navbar-item" href="{% url 'challenges' %}">Challenges</a>
+                                    <a class="navbar-item" href="{% url 'change_password' %}">Change password</a>
+                                </div>
+            
+                                <div class="navbar-end">
+                                    <div class="navbar-item">
+                                        <div class="buttons">
+                                            <a class="button is-primary" href="/logout">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+            {% endif %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

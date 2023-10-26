@@ -16,7 +16,9 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = BASE_DIR / "static"
+MEDIA_DIR = BASE_DIR / "media" 
 LOGGING_DIR = BASE_DIR / "logs"
+TEMPLATES_DIR = BASE_DIR / "main" / "templates"
 
 
 # Quick-start development settings - unsuitable for production
@@ -55,6 +57,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'leaderboard.middleware.LoginRequiredMiddleware',
+    'leaderboard.middleware.RedirectIfLoggedInMiddleware',
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'livereload.middleware.LiveReloadScript',
@@ -65,7 +70,7 @@ ROOT_URLCONF = 'leaderboard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,7 +141,7 @@ STATICFILES_DIRS = [
 
 # Media files, uploads
 
-MEDIA_ROOT = 'media/'
+MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
 # Default primary key field type
@@ -145,6 +150,13 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# LOGIN SETTINGS
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
+
+
+# LOGGING INGO
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

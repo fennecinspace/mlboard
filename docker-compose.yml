@@ -17,9 +17,10 @@ services:
       # - ./leaderboard/static:/static
       # - ./leaderboard/media:/media
       - ./leaderboard:/code 
-      # - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     environment: 
       - DEBUG=False
+      - MEDIA_ROOT=/home/mohamed/Projects/lbml/leaderboard/media
     ports:
       - 8000:8000
     networks:

@@ -124,12 +124,18 @@ class MainConfig(AppConfig):
     @classmethod
     def process_mount_path(cls, submission, path):
         from main.models import Resource
+        # dockerized path transformation
+        media_root = os.environ.get('MEDIA_ROOT', None)
 
         if 'submission.' in path.lower():
             pattern = "submission.([a-zA-Z]*)"
             m = re.match(pattern, path, re.IGNORECASE)
             parameter = m.group(1)
-            return getattr(submission, parameter).path
+            path = getattr(submission, parameter).path
+            if media_root and '/media/' in path:
+                return os.path.join(media_root, path.split('/media/')[1])
+            else:
+                return path
             
         if 'resource.' in path.lower():
             pattern = "resource.([a-zA-Z]*)\[(.*)\]"
@@ -137,7 +143,13 @@ class MainConfig(AppConfig):
             parameter = m.group(1)
             value = m.group(2)
 
-            return Resource.objects.filter(**{parameter:value})[0].file.path
-        
+            path = Resource.objects.filter(**{parameter:value})[0].file.path
+            if media_root and '/media/' in path:
+                return os.path.join(media_root, path.split('/media/')[1])
+            else:
+                return path
         else:
-            return path
+            if media_root and '/media/' in path:
+                return os.path.join(media_root, path.split('/media/')[1])
+            else:
+                return path

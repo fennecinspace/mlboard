@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="title block">{{ object.title }}</h1>
+        <img src="{{ object.image.url }}" alt="{{ object.title }}" class="challenge-image">
+        <p class="block">{{ object.description }}</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="subtitle">Upload Submission</h2>
+        <form method="post" enctype="multipart/form-data" action="{% url 'create_submission' %}">
+            {% csrf_token %}
+            <div class="field">
+                <label class="label">Select Challenge Variant:</label>
+                <div class="control">
+                    <select name="challenge_variant" class="select">
+                        {% for variant in challenge_variants %}
+                            <option value="{{ variant.pk }}">{{ variant.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Upload File:</label>
+                <div class="control">
+                    <input type="file" name="file" accept=".zip, .rar" class="input" required>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="subtitle">Best Submissions</h2>
+        <table class="table is-striped is-fullwidth">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Challenge Variant</th>
+                    <th>Best Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for submission in best_submissions %}
+                    <tr>
+                        <td>{{ submission.user.username }}</td>
+                        <td>{{ submission.challenge.title }}</td>
+                        <td>
+                            {% if submission.score == None %}
+                                {{ submission.status }}
+                            {% else %}
+                                {{ submission.score }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="subtitle">Your Submissions</h2>
+        <table class="table is-striped is-fullwidth">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Challenge Variant</th>
+                    <th>Filename</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for submission in user_submissions %}
+                    <tr>
+                        <td>{{ submission.user.username }}</td>
+                        <td>{{ submission.challenge.title }}</td>
+                        <td>{{ submission.filename }}</td>
+                        <td>
+                            {% if submission.score == None %}
+                                {{ submission.status }}
+                            {% else %}
+                                {{ submission.score }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+    
+{% endblock %}

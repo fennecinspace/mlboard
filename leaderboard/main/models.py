@@ -56,6 +56,9 @@ class Submission(models.Model):
 		('DONE', 'DONE'),
 	), default = 'IN-QUEUE')
 
+	def filename(self):
+		return os.path.basename(self.file.name)
+
 	def __str__(self):
 			return f"{self.user.username} {self.challenge.title} {self.score}"
 
