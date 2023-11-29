@@ -27,7 +27,9 @@
             <div class="field">
                 <label class="label">Upload File:</label>
                 <div class="control">
-                    <input type="file" name="file" accept=".zip, .rar" class="input" required>
+                    <input type="file" name="file" 
+                        accept="{% for variant in challenge_variants %} {{variant.processor.ext}}, {% endfor %}"
+                        class="input" required>
                 </div>
             </div>
             <div class="field">

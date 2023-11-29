@@ -34,10 +34,11 @@ class ChallengeView(DetailView):
         best_submissions = {}
 
         for submission in all_submissions:
-            if submission.user not in best_submissions:
-                best_submissions[submission.user] = submission
-            elif submission.score > best_submissions[submission.user].score:
-                best_submissions[submission.user] = submission
+            if submission.score:
+                if submission.user not in best_submissions:
+                    best_submissions[submission.user] = submission
+                elif submission.score > best_submissions[submission.user].score:
+                    best_submissions[submission.user] = submission
 
         submissions = [sub.id for user, sub in best_submissions.items()]
 
@@ -47,13 +48,6 @@ class ChallengeView(DetailView):
         context['best_submissions'] = best_submissions
         
         return context
-    
-
-def upload_model(request):
-    if request.method=="POST":
-        print(request.user, request.FILES['model-file'])
-        uploaded_file = request.FILES['model-file']
-        pass
 
 
 class CustomLoginView(LoginView):

@@ -48,13 +48,11 @@ class MainConfig(AppConfig):
             for submission in submissions_to_process:
                 print(f'Running Submission {submission}')
                 try:
-                    # submission.status = 'PROCESSING'
-                    submission.save()
                     cls.run_container(submission)
                     submission.status = 'DONE'
                     submission.save()
                 except Exception as e:
-                    # submission.status = 'ERROR'
+                    submission.status = 'ERROR'
                     submission.save()
                     print(e)
                     logging.exception(e)
@@ -70,18 +68,21 @@ class MainConfig(AppConfig):
         
         image = submission.challenge.processor.image_name.strip()
         command = submission.challenge.processor.command.split(image)[1].strip()
-        
+
         print('Reading Mounts')
-        mounts = cls.create_mounts(submission)
+        mounts, original_paths, processed_paths = cls.create_mounts(submission)
+
+        command = cls.process_command_paths(command, original_paths, processed_paths)
 
         print('Launching Container')
         results = client.containers.run(
             image, 
             command,
             mounts = mounts,
+            auto_remove = True,
         )
 
-        results = results.decode("utf-8") 
+        results = results.decode("utf-8")
         print(results)
         logging.debug(results)
 
@@ -95,13 +96,16 @@ class MainConfig(AppConfig):
     @classmethod
     def create_mounts(cls, submission):
         mounts = []
+        original_paths = []
+        processed_paths = []
 
         args = submission.challenge.processor.command.split(' ')
-        for i in range(len(args)):
+        for i, arg in enumerate(args):
             if args[i].strip() != '-v':
                 continue
 
             source, target = args[i+1].split(':')
+            original_paths += [source, target]
 
             print(source, target)
 
@@ -113,12 +117,14 @@ class MainConfig(AppConfig):
             if source.endswith('.zip'):
                 source = source[:-4]
             if target.endswith('.zip'):
-                target = target[:-4] 
+                target = target[:-4]
 
             print(source, target)
             mounts += [docker.types.Mount(type='bind', source= source, target = target)]
 
-        return mounts
+            processed_paths += [source, target]
+
+        return mounts, original_paths, processed_paths
 
 
     @classmethod
@@ -153,3 +159,15 @@ class MainConfig(AppConfig):
                 return os.path.join(media_root, path.split('/media/')[1])
             else:
                 return path
+            
+
+    @classmethod
+    def process_command_paths(cls, command, original_paths, processed_paths):
+        from main.models import Resource
+        # dockerized path transformation
+        media_root = os.environ.get('MEDIA_ROOT', None)
+
+        for i, path in enumerate(original_paths):
+            if path in command:
+                command = command.replace(path, processed_paths[i])
+        return command

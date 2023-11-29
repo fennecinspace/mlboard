@@ -8,9 +8,14 @@ from tensorflow.keras.preprocessing import image_dataset_from_directory
 def test(model_path, test_dataset, batch_size):
     print(f'Loading Model at {model_path}')
     model = load_model(model_path, compile=False)
-    model.compile(loss='categorical_crossentropy',optimizer=tf.keras.optimizers.SGD(learning_rate=0.1),metrics=['accuracy'])
-
-    input_size = model.layers[0].get_output_at(0).get_shape().as_list()[1:3]
+    model.compile(
+        loss = 'categorical_crossentropy',
+        optimizer = tf.keras.optimizers.SGD(learning_rate = 0.1),
+        metrics=['accuracy']
+    )
+    
+    config = model.get_config() # Returns pretty much every information about your model
+    input_size = config["layers"][0]["config"]["batch_input_shape"][1:3]
     print(f'Input Size is: {input_size}')
 
     print(f'Loading Dataset at {test_dataset}')
@@ -24,7 +29,7 @@ def test(model_path, test_dataset, batch_size):
 
     print(f'Calculating Score')
     score = model.evaluate(test_ds, steps = len(test_ds), workers = 1, verbose = 2)
-    print(f'Score is: {score[1]}')
+    print(f'Score is: {score[1] * 100}')
     
     return score
 
