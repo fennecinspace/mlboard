@@ -30,6 +30,8 @@ def test(model_path, test_dataset, batch_size):
     print(f'Calculating Score')
     score = model.evaluate(test_ds, steps = len(test_ds), workers = 1, verbose = 2)
     print(f'Score is: {score[1] * 100}')
+    print(f'Params-NB is: {model.count_params()}')
+    print(f'File-Size is: {os.path.getsize(model_path)}')
     
     return score
 

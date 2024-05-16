@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import DataLoader
 import torchvision.datasets as datasets
 from torchvision import transforms
-
+import os
 
 
 def test(model_path, test_dataset, batch_size):
@@ -54,10 +54,19 @@ def test(model_path, test_dataset, batch_size):
             total += accuracy.int().sum()
             counter += len(images)
 
-        score = total / counter * 100
+        accuracy = total / counter * 100
+        paramsNb = sum(p.numel() for p in model.parameters() if p.requires_grad)
+        fileSize = os.path.getsize(model_path)
+
+        score = (accuracy * 1000000000) / (paramsNb + fileSize)
+
+        print(f'Accuracy is: {accuracy}')
+        print(f'Params-NB is: {paramsNb}')
+        print(f'File-Size is: {fileSize}')
+
         print(f'Score is: {score}')
         
-        return score * 100
+        return score
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

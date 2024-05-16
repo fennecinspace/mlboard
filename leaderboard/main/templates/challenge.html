@@ -49,6 +49,9 @@
                 <tr>
                     <th>User</th>
                     <th>Challenge Variant</th>
+                    <th>Accuracy</th>
+                    <th>Params</th>
+                    <th>Size</th>
                     <th>Best Score</th>
                 </tr>
             </thead>
@@ -57,6 +60,27 @@
                     <tr>
                         <td>{{ submission.user.username }}</td>
                         <td>{{ submission.challenge.title }}</td>
+                        <td>
+                            {% if submission.accuracy == None %}
+                                {{ submission.status }}
+                            {% else %}
+                                {{ submission.accuracy }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if submission.paramsNb == None %}
+                                {{ submission.status }}
+                            {% else %}
+                                {{ submission.paramsNb }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if submission.fileSize == None %}
+                                {{ submission.status }}
+                            {% else %}
+                                {{ submission.fileSize }}
+                            {% endif %}
+                        </td>
                         <td>
                             {% if submission.score == None %}
                                 {{ submission.status }}
@@ -80,6 +104,9 @@
                     <th>User</th>
                     <th>Challenge Variant</th>
                     <th>Filename</th>
+                    <th>Accuracy</th>
+                    <th>Params</th>
+                    <th>Size</th>
                     <th>Score</th>
                 </tr>
             </thead>
@@ -89,6 +116,27 @@
                         <td>{{ submission.user.username }}</td>
                         <td>{{ submission.challenge.title }}</td>
                         <td>{{ submission.filename }}</td>
+                        <td>
+                            {% if submission.accuracy == None %}
+                                {{ submission.status }}
+                            {% else %}
+                                {{ submission.accuracy }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if submission.paramsNb == None %}
+                                {{ submission.status }}
+                            {% else %}
+                                {{ submission.paramsNb }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if submission.fileSize == None %}
+                                {{ submission.status }}
+                            {% else %}
+                                {{ submission.fileSize }}
+                            {% endif %}
+                        </td>
                         <td>
                             {% if submission.score == None %}
                                 {{ submission.status }}

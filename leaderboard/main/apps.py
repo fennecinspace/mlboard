@@ -87,9 +87,19 @@ class MainConfig(AppConfig):
         logging.debug(results)
 
         score = results.split('Score is:')[1].split('\n')[0].strip()
+        accuracy = results.split('Accuracy is:')[1].split('\n')[0].strip()
+        paramsNb = results.split('Params-NB is:')[1].split('\n')[0].strip()
+        fileSize = results.split('File-Size is:')[1].split('\n')[0].strip()
+
         print(f"Extracted Score {score}")
+        print(f"Extracted Accuracy {accuracy}")
+        print(f"Extracted Params-NB {paramsNb}")
+        print(f"Extracted File-Size {fileSize}")
 
         submission.score = float(score)
+        submission.fileSize = int(fileSize)
+        submission.paramsNb = int(paramsNb)
+        submission.accuracy = float(accuracy)
         submission.save()
 
 

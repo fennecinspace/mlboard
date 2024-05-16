@@ -49,6 +49,10 @@ class Submission(models.Model):
 	challenge = models.ForeignKey("ChallengeVariant", on_delete = models.CASCADE)
 	file = models.FileField(upload_to ='submissions/')
 	score = models.FloatField(blank = True, null = True)
+	accuracy = models.FloatField(blank = True, null = True)
+	paramsNb = models.IntegerField(blank = True, null = True)
+	fileSize = models.IntegerField(blank = True, null = True)
+
 	status = models.CharField(max_length = 200, choices = (
 		('ERROR', 'ERROR'),
 		('PROCESSING', 'PROCESSING'),
